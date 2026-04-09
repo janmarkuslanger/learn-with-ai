@@ -12,7 +12,7 @@ Works for any topic — software architecture, distributed systems, product mana
 1. **Clone or download this repo**
 2. **Open `CURRICULUM.md`** — fill in your background, goal, real projects, and what you want to learn
 3. **Open this repo in your AI agent** (e.g. Claude Code, Cursor, or any agent that reads `AGENTS.md`)
-4. **Start your first session** by typing `lernen` or `learn`
+4. **Start your first session** by typing `learn`
 
 That's it. The agent reads your curriculum and guides everything from there.
 
@@ -23,7 +23,7 @@ That's it. The agent reads your curriculum and guides everything from there.
 Type one of these in your agent:
 
 ```
-lernen / learn  → auto-select the next session type
+learn  → auto-select the next session type
 concept         → new concept session  (15–20 min)
 quiz            → quiz on the last concept  (5 questions)
 kata            → focused design or coding task
@@ -58,7 +58,7 @@ PROGRESS.md     ← Current status, gaps, session log (agent maintains this)
 
 - **One session = 15–20 minutes.** No need to do more at once.
 - **Be honest in quizzes.** The agent tracks your gaps and revisits them.
-- **Use `lernen` / `learn` each time.** The agent picks the right next session automatically.
+- **Use `learn` each time.** The agent picks the right next session automatically.
 - **Reviews happen naturally.** After every 4 completed topics, the agent inserts a review.
 - **Gap weeks are fine.** Come back after a break and the agent picks up exactly where you left off.
 - **Real projects make it stick.** Add your actual projects to `CURRICULUM.md`.

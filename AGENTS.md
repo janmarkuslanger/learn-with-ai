@@ -19,7 +19,7 @@ The learner triggers a session with a short command:
 
 | Command | Mode | Duration target |
 |---|---|---|
-| `lernen` / `learn` | Auto-select (see rotation logic below) | varies |
+| `learn` | Auto-select (see rotation logic below) | varies |
 | `concept` | Concept session | 15–20 min read + summary |
 | `quiz` | Quiz session | 5 questions, increasing difficulty |
 | `kata` | Kata session | one focused design/coding task |
@@ -27,7 +27,7 @@ The learner triggers a session with a short command:
 | `review` | Spaced review | targets oldest + weakest topics |
 | `wildcard` | Free session | scenario or free kata on any topic |
 
-### Auto-rotation logic for `lernen` / `learn`
+### Auto-rotation logic for `learn`
 
 When the learner triggers auto-select, read `PROGRESS.md` to find the last completed session type
 and the current topic, then pick the next logical step:
