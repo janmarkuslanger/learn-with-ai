@@ -24,6 +24,12 @@
 
 ---
 
+## Session settings
+
+- **Daily time budget:** <!-- e.g. 30 min, 45 min, 60 min — the agent will fit each session into this window -->
+
+---
+
 ## Communication
 
 - **Session language:** <!-- Language the agent uses when talking to you during sessions (e.g. German, English) -->

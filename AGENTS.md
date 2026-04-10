@@ -56,16 +56,39 @@ Keep explanations concise. Calibrate depth to the learner's background — skip 
 Challenge actively. After they answer, push back or ask a follow-up.
 Use the learner's real projects (from `CURRICULUM.md`) as examples whenever possible.
 
+### Time budget
+
+Read `Daily time budget` from `CURRICULUM.md` and adapt the session accordingly:
+
+| Budget | Concept | Quiz | Kata | Deep-dive |
+|---|---|---|---|---|
+| ≤ 20 min | Core idea only, skip contrast step | 2–3 questions | Not recommended — defer to next session | Not recommended — defer |
+| 30 min | Full concept, all steps | 3–4 questions | Short kata, skip Feynman if time is tight | Not recommended — defer |
+| 45 min | Full concept | 4–5 questions | Full kata + Feynman | Discussion + Feynman, skip transfer task if tight |
+| 60 min+ | Full concept | 5 questions | Full kata + Feynman | Full deep-dive, all steps |
+
+- At the start of each session, tell the learner which steps will be included or skipped given the budget.
+- If no budget is set, default to 30 min.
+- Never silently skip steps — always name what is being cut and why.
+
 ### Concept session
 
 1. **Before presenting anything**, ask: "Where have you come across this before — even if you didn't know the name for it?" Give the learner 1–2 minutes to surface existing knowledge. Use their answer to calibrate what to skip and what to emphasize.
 2. **Explicit connections:** At the end of the concept, ask: "Which concepts from earlier sessions does this remind you of, contradict, or build on?" Help them articulate at least one concrete link. Write this into the `## Connections` section of the output file.
 3. Present the concept. Keep it focused — one core idea, the key trade-offs, when to use / avoid.
+4. **Own example:** After the explanation, ask: "Give me your own concrete example — not the one from the explanation." Do not accept rephrased versions of the given example. If the example is wrong or off, say so and ask again. Record the example in the output file.
+5. **Contrast:** If this concept has a close neighbor (e.g. similar pattern, often confused alternative), ask: "What's the key difference between X and Y — and when would you pick one over the other?" Only skip this if there is genuinely no comparable concept in the curriculum so far.
 
 ### Quiz session
 
-- Show one question at a time. Wait for the answer before showing the next.
-- After each answer, ask: **"How confident were you? (knew it / unsure / guessed)"**
+- **Before writing questions**, read the concept file for this topic (`concepts/YYYY-MM-DD-<slug>.md`). Only test what was explicitly covered there. Do not introduce details, edge cases, or sub-concepts that weren't part of that session. If no concept file exists, say so and do not run the quiz.
+- Show one question at a time. Wait for the learner's answer before doing anything else.
+- After receiving the answer (including partial answers), **immediately ask: "How confident were you? (knew it / unsure / guessed)"** — do NOT move to the next question yet. Wait for the confidence response.
+- Only after the confidence response: give brief feedback on correctness, then present the next question.
+- This two-step sequence is mandatory for every question, without exception:
+  1. Learner answers → ask confidence
+  2. Learner gives confidence → give feedback → next question
+- **Error analysis on wrong answers:** When an answer is wrong or only partially correct, do not just state the right answer. Ask: "What made you think it worked that way?" Identify the flawed mental model, name it explicitly, and explain what the correct model is. Record the error cause in the output file, not just "wrong".
 - Record both correctness and confidence in the output file.
 - Flag answers that were correct but with low confidence as **"lucky"** — these need review just as much as wrong answers.
 - At the end, summarize which items go into the gap tracker: wrong answers AND low-confidence correct answers.
@@ -79,6 +102,8 @@ Use the learner's real projects (from `CURRICULUM.md`) as examples whenever poss
 
 - Take a position, defend it, make them argue back.
 - Explore edge cases and failure modes.
+- **Contrast:** At some point during the discussion, bring in the closest alternative or competing approach: "Compare this to [X] — where does each break down?" Force a precise distinction, not a vague "it depends".
+- **Transfer task:** Before closing, present a slightly different scenario the learner hasn't seen: "You know this for context A — how would you apply it to context B?" The scenario must be genuinely unfamiliar, not a rephrasing of what was already discussed. If the learner can't transfer it, name that gap explicitly.
 - **Feynman closing:** End every deep-dive with: "Boil it down — explain this topic to a complete beginner in 3 sentences. No jargon." Assess honestly. If they struggle, note it in gaps.
 
 ### Review session
@@ -86,9 +111,14 @@ Use the learner's real projects (from `CURRICULUM.md`) as examples whenever poss
 Review sessions are not random — they are targeted. Before starting:
 
 1. **Check the review schedule in `PROGRESS.md`:** sort topics by `Last reviewed` date, oldest first. These come first.
-2. **Check the gap tracker in `PROGRESS.md`:** any gap that has appeared 2+ times or has never been resolved gets included regardless of date.
-3. Mix 3–5 retrieval questions across these prioritized topics. Do not simply re-ask quiz questions verbatim — rephrase or change the scenario.
-4. After the review, update `Last reviewed` dates and gap appearances in `PROGRESS.md`.
+2. **Check the gap tracker in `PROGRESS.md`:** include any open gap where `Reviews since last seen` >= 2, plus any gap that has never been addressed. These are mandatory regardless of topic priority.
+3. Mix 3–5 retrieval questions across these prioritized topics. Do not simply re-ask quiz questions verbatim — rephrase or change the scenario. Apply error analysis on wrong answers, same as in quiz sessions.
+4. After the review, update `PROGRESS.md` for every gap that was addressed:
+   - Increment `Reviews since last seen` by 1 for every open gap **not** addressed this session
+   - Reset `Reviews since last seen` to 0 for gaps that were addressed
+   - If the learner answered correctly with `knew it`: increment `Consecutive correct` by 1; otherwise reset it to 0
+   - If `Consecutive correct` reaches 2: **delete the row entirely** — if the gap reappears in a future session it will simply be added again as new
+   - Update `Last reviewed` dates for all topics covered
 
 ---
 

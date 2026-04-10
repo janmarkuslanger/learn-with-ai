@@ -33,11 +33,12 @@
 ## Gap tracker
 
 <!-- Agent fills this in after sessions. Gaps from quizzes (wrong or low-confidence) and Feynman checks go here.
-     Recurrence count drives review priority — a gap that appears 2+ times always appears in the next review. -->
+     - Consecutive correct: counts "knew it" answers in a row — gap is deleted after 2
+     - Reviews since last seen: resets to 0 each time the gap is addressed; if it reaches 2, the gap must appear in the next review -->
 
-| Topic | Gap | First seen | Recurrences | Last addressed |
+| Topic | Gap | First seen | Consecutive correct | Reviews since last seen |
 |---|---|---|---|---|
-| — | — | — | — | — |
+| — | — | — | 0 | 0 |
 
 ---
 
