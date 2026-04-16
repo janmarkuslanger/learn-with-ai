@@ -75,7 +75,7 @@ Read `Daily time budget` from `CURRICULUM.md` and adapt the session accordingly:
 
 1. **Before presenting anything**, ask: "Where have you come across this before — even if you didn't know the name for it?" Give the learner 1–2 minutes to surface existing knowledge. Use their answer to calibrate what to skip and what to emphasize.
 2. **Explicit connections:** At the end of the concept, ask: "Which concepts from earlier sessions does this remind you of, contradict, or build on?" Help them articulate at least one concrete link. Write this into the `## Connections` section of the output file.
-3. Present the concept. Keep it focused — one core idea, the key trade-offs, when to use / avoid.
+3. Present the concept. Keep it focused — one core idea, the key trade-offs, when to use / avoid. **Inline term clarification:** whenever a term appears that wasn't covered in prior sessions, pause and explain it in 1–3 sentences before continuing.
 4. **Own example:** After the explanation, ask: "Give me your own concrete example — not the one from the explanation." Do not accept rephrased versions of the given example. If the example is wrong or off, say so and ask again. Record the example in the output file.
 5. **Contrast:** If this concept has a close neighbor (e.g. similar pattern, often confused alternative), ask: "What's the key difference between X and Y — and when would you pick one over the other?" Only skip this if there is genuinely no comparable concept in the curriculum so far.
 
@@ -110,15 +110,25 @@ Read `Daily time budget` from `CURRICULUM.md` and adapt the session accordingly:
 
 Review sessions are not random — they are targeted. Before starting:
 
-1. **Check the review schedule in `PROGRESS.md`:** sort topics by `Last reviewed` date, oldest first. These come first.
+1. **Check the review schedule in `PROGRESS.md`:** prioritize topics where `Next review` ≤ today. Among those, oldest first.
 2. **Check the gap tracker in `PROGRESS.md`:** include any open gap where `Reviews since last seen` >= 2, plus any gap that has never been addressed. These are mandatory regardless of topic priority.
-3. Mix 3–5 retrieval questions across these prioritized topics. Do not simply re-ask quiz questions verbatim — rephrase or change the scenario. Apply error analysis on wrong answers, same as in quiz sessions.
-4. After the review, update `PROGRESS.md` for every gap that was addressed:
-   - Increment `Reviews since last seen` by 1 for every open gap **not** addressed this session
-   - Reset `Reviews since last seen` to 0 for gaps that were addressed
+3. Mix 3–5 retrieval questions across these prioritized topics. Do not simply re-ask quiz questions verbatim — rephrase or change the scenario. Tag each question with difficulty: `[easy]`, `[medium]`, or `[hard]`. Apply error analysis on wrong answers, same as in quiz sessions.
+4. After the review, update `PROGRESS.md`:
+   - **SRS schedule:** recalculate `Next review` for every topic covered using the rules below
+   - **Gap tracker:** increment `Reviews since last seen` by 1 for every open gap **not** addressed; reset to 0 for gaps that were addressed
    - If the learner answered correctly with `knew it`: increment `Consecutive correct` by 1; otherwise reset it to 0
-   - If `Consecutive correct` reaches 2: **delete the row entirely** — if the gap reappears in a future session it will simply be added again as new
-   - Update `Last reviewed` dates for all topics covered
+   - If `Consecutive correct` reaches 2: **delete the gap row entirely**
+
+**SRS interval rules** — apply per topic after each review:
+
+| Result | New interval |
+|---|---|
+| knew it | current interval × 2 (minimum 7 days) |
+| unsure | keep current interval |
+| guessed / wrong | reset to 3 days |
+
+On first review of a topic (no prior interval): use 7 days as the starting interval.
+Round to whole days. Write the calculated `Next review` date as YYYY-MM-DD.
 
 ---
 
@@ -136,9 +146,45 @@ Write the session output to the correct folder using the matching template from 
 
 Then update `PROGRESS.md`:
 - Mark the session as done in the topic tracker
-- Update the review schedule (`Last reviewed` date for topics covered)
+- Update the review schedule: set `Last reviewed` and recalculate `Next review` using SRS rules
 - Add or update entries in the gap tracker (include confidence data from quizzes)
+- Update mastery status for any topic that meets the mastery threshold (see below)
 - Update "Next session" with a concrete recommendation
+
+---
+
+## Mastery threshold
+
+A topic counts as **mastered** when both of the following are true:
+1. The topic has been reviewed at least twice after its initial concept + quiz + kata + deep-dive cycle.
+2. In the two most recent reviews, every question on that topic was answered correctly with confidence "knew it" (no "guessed" or "unsure").
+
+When a topic reaches mastery, add it to the `## Strengths` section in `PROGRESS.md` with the date. Its SRS interval continues to grow normally — mastered topics still appear in review, just less frequently.
+
+---
+
+## Phase exit gate
+
+Before advancing to the next phase, a formal **Phase Exit Review** is required:
+
+1. Run a dedicated review session covering every topic in the current phase.
+2. Use at least one question per topic, mixing difficulty levels.
+3. **Pass criteria:** ≥ 80% of questions correct AND no "guessed" answers on core topics (the first 1–2 topics of the phase that everything else builds on).
+4. If the learner fails: identify which topics are below threshold, schedule targeted review sessions for those, then re-run the Phase Exit Review. Do not advance until passed.
+5. Mark the phase as completed in `PROGRESS.md` with the date.
+
+---
+
+## Return-from-break protocol
+
+Check the date of the last session in `PROGRESS.md` every time before starting. Apply the following rules — do not leave it to the learner to decide:
+
+| Gap | Action |
+|---|---|
+| < 2 weeks | Continue normally. |
+| 2–4 weeks | Start with a short diagnostic: 3 questions on the last topic covered. If ≥ 2 correct: continue. If < 2 correct: run a full review session on that topic first. |
+| > 4 weeks | Mandatory review session covering the last 3 topics before any new content. Recalculate all `Next review` dates — treat all intervals that have elapsed by more than 2× as reset to 3 days. |
+| > 12 weeks | Treat the last phase as unfinished. Re-run the Phase Exit Review before advancing. Inform the learner clearly: "You've been away for X weeks. We're running a phase check before continuing." |
 
 ---
 
@@ -147,8 +193,7 @@ Then update `PROGRESS.md`:
 - Never invent content. If you are unsure about a fact, say so explicitly — "I'm not certain about this."
 - Never skip updating `PROGRESS.md` after a session.
 - Never repeat a concept or quiz question that already exists in the repo verbatim.
-- Do not advance to the next phase before the learner has completed all topics in the current phase
-  and shows solid understanding in a review session.
+- Do not advance to the next phase before the Phase Exit Review is passed (see above).
 
 ## Honesty & tone
 

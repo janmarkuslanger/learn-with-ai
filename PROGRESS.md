@@ -22,11 +22,12 @@
 
 ## Review schedule
 
-<!-- Agent keeps this up to date. Topics with the oldest "Last reviewed" date get prioritized in review sessions. -->
+<!-- Agent keeps this up to date. Topics where "Next review" ≤ today get prioritized in review sessions.
+     Intervals follow SRS rules: knew it → ×2 (min 7d) | unsure → keep | guessed/wrong → reset 3d -->
 
-| Topic | Last reviewed | Notes |
-|---|---|---|
-| — | — | — |
+| Topic | Last reviewed | Interval (days) | Next review | Notes |
+|---|---|---|---|---|
+| — | — | — | — | — |
 
 ---
 
@@ -44,7 +45,10 @@
 
 ## Strengths
 
-_Agent fills this in after sessions._
+<!-- A topic is added here when: reviewed ≥ 2× after completing concept+quiz+kata+deep-dive,
+     AND the last 2 reviews had 100% correct answers, all with confidence "knew it". -->
+
+_None yet._
 
 ---
 

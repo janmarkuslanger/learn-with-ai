@@ -8,7 +8,7 @@
 
 ## Questions & Answers
 
-### Q1
+### Q1 [easy]
 
 **Question:** ...
 
@@ -22,7 +22,7 @@
 
 ---
 
-### Q2
+### Q2 [easy]
 
 **Question:** ...
 
@@ -36,7 +36,7 @@
 
 ---
 
-### Q3
+### Q3 [medium]
 
 **Question:** ...
 
@@ -50,7 +50,7 @@
 
 ---
 
-### Q4
+### Q4 [medium]
 
 **Question:** ...
 
@@ -64,7 +64,7 @@
 
 ---
 
-### Q5
+### Q5 [hard]
 
 **Question:** ...
 
