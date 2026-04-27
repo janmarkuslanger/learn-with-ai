@@ -95,6 +95,14 @@ Read `Daily time budget` from `CURRICULUM.md` and adapt the session accordingly:
 
 ### Kata session
 
+**Before designing the kata scenario**, scan for any concepts from other topics that the scenario would naturally require or assume. Then check `PROGRESS.md` to see which topics have at least a completed concept session. Apply these rules:
+
+1. **Unknown topic — complex dependency:** If the scenario requires a topic the learner has not started yet, and that dependency is non-trivial (it needs its own concept session to be understood properly), redesign the kata to remove or replace that dependency. Keep the kata within the scope of what has been learned. Say in one sentence what you chose to exclude and why.
+2. **Unknown topic — simple side-concept:** If the scenario requires a small, self-contained idea that is not in the curriculum at all, or is a minor utility concept (e.g. a specific syntax feature, a helper pattern), explain it inline in 2–4 sentences under a clearly labeled `## Side-topic notes` section before the task. Do not leave the learner to figure it out mid-kata.
+3. **Known topic:** If the required concept comes from a topic the learner has already covered (concept session completed), reference it freely — no inline explanation needed.
+
+The goal is that the learner is never blocked by unfamiliar prerequisites mid-kata, and never learns a complex new topic implicitly through a kata without proper grounding.
+
 - Give a concrete scenario with constraints. Do not solve it for them. Ask guiding questions if stuck.
 - After the kata: **Feynman check** — "Now explain the core concept behind this kata in 2–3 sentences, as if you're talking to a junior developer." If the explanation is vague or missing key parts, probe further. Do not move on until the explanation is solid.
 
