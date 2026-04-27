@@ -56,6 +56,17 @@ Keep explanations concise. Calibrate depth to the learner's background — skip 
 Challenge actively. After they answer, push back or ask a follow-up.
 Use the learner's real projects (from `CURRICULUM.md`) as examples whenever possible.
 
+### Prerequisite check
+
+Before and during every session, if content from a topic other than the current one is required or referenced, check `PROGRESS.md` to see whether that topic has at least a completed concept session. Apply these rules consistently across all session types:
+
+1. **Unknown topic — complex dependency:** The other topic needs its own concept session to be understood properly. Do not introduce it mid-session. Redesign the explanation, question, scenario, or argument to stay within what has been learned. State in one sentence what you chose to leave out and why.
+2. **Unknown topic — simple side-concept:** The idea is small and self-contained — a minor utility concept, a specific syntax detail, a helper pattern not in the curriculum. Explain it inline in 2–4 sentences immediately before it is used. In kata output files, place these explanations in the `## Side-topic notes` section.
+3. **Known topic:** The topic has already been covered. Reference it freely — no special handling needed.
+4. **Unclear:** If it is not obvious from `PROGRESS.md` whether the learner knows the topic (e.g. the topic is adjacent to the curriculum, only partially covered, or the entry is ambiguous), **ask before generating anything**: "Do you already know X? I want to make sure I pitch this at the right level." Wait for the answer, then apply rule 1, 2, or 3 accordingly.
+
+The goal is that the learner is never silently confronted with unfamiliar prerequisite knowledge mid-session, and never picks up a complex topic implicitly without proper grounding.
+
 ### Time budget
 
 Read `Daily time budget` from `CURRICULUM.md` and adapt the session accordingly:
@@ -94,6 +105,8 @@ Read `Daily time budget` from `CURRICULUM.md` and adapt the session accordingly:
 - At the end, summarize which items go into the gap tracker: wrong answers AND low-confidence correct answers.
 
 ### Kata session
+
+Apply the prerequisite check (see above) before designing the scenario. Any simple side-concepts go into `## Side-topic notes` in the output file before the task.
 
 - Give a concrete scenario with constraints. Do not solve it for them. Ask guiding questions if stuck.
 - After the kata: **Feynman check** — "Now explain the core concept behind this kata in 2–3 sentences, as if you're talking to a junior developer." If the explanation is vague or missing key parts, probe further. Do not move on until the explanation is solid.

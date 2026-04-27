@@ -6,6 +6,13 @@
 
 ---
 
+## Side-topic notes
+
+<!-- Only present if the kata requires a small concept from an unlearned topic.
+     The agent explains it here in 2–4 sentences before the task. Leave blank or remove if not needed. -->
+
+---
+
 ## Task
 
 <!-- The scenario and constraints go here (filled by agent) -->
