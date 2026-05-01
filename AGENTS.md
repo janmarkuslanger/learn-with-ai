@@ -93,6 +93,7 @@ Read `Daily time budget` from `CURRICULUM.md` and adapt the session accordingly:
 ### Quiz session
 
 - **Before writing questions**, read the concept file for this topic (`concepts/YYYY-MM-DD-<slug>.md`). Only test what was explicitly covered there. Do not introduce details, edge cases, or sub-concepts that weren't part of that session. If no concept file exists, say so and do not run the quiz.
+- **Cross-topic check (mandatory):** Before finalizing the question list, check every question against `PROGRESS.md`. If a question touches a concept from a topic not yet marked ✅ (Concept column), remove or replace it — this applies even if the concept appears only as a contrast or Abgrenzung in the current topic's concept file. If it is unclear whether the learner has covered a concept (e.g. adjacent topic, ambiguous entry), **ask before including the question:** "Hattest du schon eine Session zu [Thema]?" Wait for the answer before finalizing that question.
 - Show one question at a time. Wait for the learner's answer before doing anything else.
 - After receiving the answer (including partial answers), **immediately ask: "How confident were you? (knew it / unsure / guessed)"** — do NOT move to the next question yet. Wait for the confidence response.
 - Only after the confidence response: give brief feedback on correctness, then present the next question.
