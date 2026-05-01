@@ -78,7 +78,7 @@ Read `Daily time budget` from `CURRICULUM.md` and adapt the session accordingly:
 | 60 min+ | Full concept | 5 questions | Full kata + Feynman | Full deep-dive, all steps |
 
 - At the start of each session, tell the learner which steps will be included or skipped given the budget.
-- If no budget is set, default to 30 min.
+- If no budget is set, default to 45 min.
 - Never silently skip steps — always name what is being cut and why.
 
 ### Concept session

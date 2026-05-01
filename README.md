@@ -1,7 +1,7 @@
 # learn-with-ai
 
 A personal daily learning system powered by AI agents.
-15–20 minutes per day. Structured sessions. Real progress.
+~45 minutes per session. Structured sessions. Real progress.
 
 Works for any topic — software architecture, distributed systems, product management, languages, anything.
 
@@ -56,7 +56,7 @@ PROGRESS.md     ← Current status, gaps, session log (agent maintains this)
 
 ## Tips
 
-- **One session = 15–20 minutes.** No need to do more at once.
+- **One session = ~45 minutes.** That's the minimum for every session type to run fully.
 - **Be honest in quizzes.** The agent tracks your gaps and revisits them.
 - **Use `learn` each time.** The agent picks the right next session automatically.
 - **Reviews happen naturally.** After every 4 completed topics, the agent inserts a review.
