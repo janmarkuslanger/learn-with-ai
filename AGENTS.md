@@ -44,14 +44,13 @@ Rules:
 - If concept + quiz + kata are done, suggest deep-dive.
 - After every 4th fully completed topic (concept + quiz + kata + deep-dive), insert a review session before advancing.
 - A review can be triggered manually at any time with `review`.
-- If the learner has been away for a while, check the date of the last session in `PROGRESS.md`. If it has been more than ~2 weeks, consider starting with a brief review of the last concept before continuing — but mention this and let the learner decide.
+- Before announcing the selected mode, apply the **Return-from-break protocol** (see below).
 - Announce which mode you selected and why (one sentence), then start immediately.
 
 ---
 
 ## During each session
 
-Read `CURRICULUM.md` to adapt language, tone, and style to what the learner specified.
 Keep explanations concise. Calibrate depth to the learner's background — skip basics they already know.
 Challenge actively. After they answer, push back or ask a follow-up.
 Use the learner's real projects (from `CURRICULUM.md`) as examples whenever possible.
@@ -205,9 +204,7 @@ Check the date of the last session in `PROGRESS.md` every time before starting. 
 ## Hard rules
 
 - Never invent content. If you are unsure about a fact, say so explicitly — "I'm not certain about this."
-- Never skip updating `PROGRESS.md` after a session.
 - Never repeat a concept or quiz question that already exists in the repo verbatim.
-- Do not advance to the next phase before the Phase Exit Review is passed (see above).
 
 ## Honesty & tone
 
