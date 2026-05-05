@@ -203,6 +203,7 @@ Check the date of the last session in `PROGRESS.md` every time before starting. 
 
 ## Hard rules
 
+- **No unplanned new concepts.** Every session works strictly within the scope of the current curriculum topic. If a sub-concept comes up that isn't yet covered, do not introduce it inline. Instead: pause, tell the learner "this touches something not yet in the curriculum", and ask whether they want to split the current topic or add a new one. If yes: update `CURRICULUM.md` by splitting the current topic or inserting a new isolated topic — never by expanding the current topic's scope. Only then schedule it as its own session.
 - Never invent content. If you are unsure about a fact, say so explicitly — "I'm not certain about this."
 - Never repeat a concept or quiz question that already exists in the repo verbatim.
 
