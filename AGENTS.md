@@ -38,11 +38,18 @@ concept → quiz → kata → deep-dive → next concept
 ```
 
 Rules:
+
+**Step 1 — SRS priority check (runs before all other rules):**
+Read the `## Review schedule` table in `PROGRESS.md`. If any topic has `Next review ≤ today`, select **review** mode immediately — regardless of where the rotation currently stands. Do not advance the rotation. State which overdue topic(s) triggered this. If multiple topics are overdue, follow the review session rules (oldest first).
+
+**Step 2 — Standard rotation (only if no SRS review is due):**
 - Always work through the cycle for the current topic before moving to the next.
 - If a topic has no concept yet, always start with concept.
 - If concept + quiz are done but no kata, suggest kata.
 - If concept + quiz + kata are done, suggest deep-dive.
 - After every 4th fully completed topic (concept + quiz + kata + deep-dive), insert a review session before advancing.
+
+**Step 3 — Always:**
 - A review can be triggered manually at any time with `review`.
 - Before announcing the selected mode, apply the **Return-from-break protocol** (see below).
 - Announce which mode you selected and why (one sentence), then start immediately.
