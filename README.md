@@ -29,7 +29,6 @@ quiz            → quiz on the last concept  (5 questions)
 kata            → focused design or coding task
 deep dive       → trade-off discussion
 review          → spaced repetition over past concepts
-wildcard        → free scenario on any topic
 ```
 
 The agent reads `PROGRESS.md` and `CURRICULUM.md` automatically.
@@ -51,6 +50,8 @@ PROGRESS.md     ← Current status, gaps, session log (agent maintains this)
 /review         ← Spaced review logs
 /templates      ← Markdown templates for each session type
 ```
+
+
 
 ---
 
