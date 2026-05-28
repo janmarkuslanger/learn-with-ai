@@ -25,7 +25,6 @@ The learner triggers a session with a short command:
 | `kata` | Kata session | one focused design/coding task |
 | `deep dive` | Discussion + Feynman | trade-offs, edge cases, Feynman check |
 | `review` | Spaced review | targets oldest + weakest topics |
-| `wildcard` | Free session | scenario or free kata on any topic |
 
 ### Auto-rotation logic for `learn`
 

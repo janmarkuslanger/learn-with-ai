@@ -17,9 +17,27 @@
 
 ---
 
+## Contrast
+
+<!-- Closest alternative or competing approach: where does each break down? -->
+
+**vs. ...:** ...
+
+---
+
 ## Trade-offs surfaced
 
 ...
+
+---
+
+## Transfer task
+
+<!-- A genuinely new scenario — not a rephrasing of what was discussed -->
+
+**Scenario:** ...
+
+**My response:** ...
 
 ---
 

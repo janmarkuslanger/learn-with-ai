@@ -38,6 +38,22 @@
 
 ---
 
+## My own example
+
+<!-- Concrete example from the learner — not a rephrasing of the one from the explanation -->
+
+...
+
+---
+
+## Contrast
+
+<!-- Key difference to the closest related concept, and when to pick one over the other -->
+
+**vs. ...:** ...
+
+---
+
 ## Connections
 
 <!-- Explicit links to previously learned concepts -->
