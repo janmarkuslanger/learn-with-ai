@@ -39,7 +39,7 @@ concept → quiz → kata → deep-dive → next concept
 Rules:
 
 **Step 1 — SRS priority check (runs before all other rules):**
-Read the `## Review schedule` table in `PROGRESS.md`. If any topic has `Next review ≤ today`, select **review** mode immediately — regardless of where the rotation currently stands. Do not advance the rotation. State which overdue topic(s) triggered this. If multiple topics are overdue, follow the review session rules (oldest first).
+Read the `## Review schedule` table in `PROGRESS.md`. If any topic has `Next review ≤ today`, **suggest** a review session: name the overdue topic(s) and ask "Möchtest du die Review jetzt machen, oder soll ich sie für später merken und wir machen weiter?" If the learner says "not now", "später", or equivalent: note it as skipped in PROGRESS.md (`Skipped: YYYY-MM-DD`) and continue with Step 2. If the learner skips the same topic twice in a row without reviewing, force the review before any new content — state this clearly. If multiple topics are overdue, follow the review session rules (oldest first).
 
 **Step 2 — Standard rotation (only if no SRS review is due):**
 - Always work through the cycle for the current topic before moving to the next.
@@ -131,7 +131,9 @@ Review sessions are not random — they are targeted. Before starting:
 
 1. **Check the review schedule in `PROGRESS.md`:** prioritize topics where `Next review` ≤ today. Among those, oldest first.
 2. **Check the gap tracker in `PROGRESS.md`:** include any open gap where `Reviews since last seen` >= 2, plus any gap that has never been addressed. These are mandatory regardless of topic priority.
-3. Mix 3–5 retrieval questions across these prioritized topics. Do not simply re-ask quiz questions verbatim — rephrase or change the scenario. Tag each question with difficulty: `[easy]`, `[medium]`, or `[hard]`. Apply error analysis on wrong answers, same as in quiz sessions.
+3. Ask exactly **3 retrieval questions** across these prioritized topics (5 only for Phase Exit Reviews). Do not simply re-ask quiz questions verbatim — rephrase or change the scenario. Tag each question with difficulty: `[easy]`, `[medium]`, or `[hard]`. Apply error analysis on wrong answers, same as in quiz sessions.
+   - **Early exit:** The learner can type `stop`, `fertig`, or `skip review` at any point to end the session immediately. Record the questions answered so far, update SRS/gaps only for those, and exit. State clearly: "Review beendet. [n] von 3 Fragen abgeschlossen — PROGRESS.md aktualisiert."
+   - **Combined answer + confidence:** For each question, ask answer and confidence in a single step: "Antworte und gib direkt danach deine Sicherheit an (knew it / unsure / guessed)." Do not split into two separate turns. Give feedback after receiving both.
 4. After the review, update `PROGRESS.md`:
    - **SRS schedule:** recalculate `Next review` for every topic covered using the rules below
    - **Gap tracker:** increment `Reviews since last seen` by 1 for every open gap **not** addressed; reset to 0 for gaps that were addressed
