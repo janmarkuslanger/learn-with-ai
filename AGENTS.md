@@ -38,8 +38,11 @@ concept → quiz → kata → deep-dive → next concept
 
 Rules:
 
-**Step 1 — SRS priority check (runs before all other rules):**
-Read the `## Review schedule` table in `PROGRESS.md`. If any topic has `Next review ≤ today`, **suggest** a review session: name the overdue topic(s) and ask "Möchtest du die Review jetzt machen, oder soll ich sie für später merken und wir machen weiter?" If the learner says "not now", "später", or equivalent: note it as skipped in PROGRESS.md (`Skipped: YYYY-MM-DD`) and continue with Step 2. If the learner skips the same topic twice in a row without reviewing, force the review before any new content — state this clearly. If multiple topics are overdue, follow the review session rules (oldest first).
+**Step 0 — Consecutive review cap (runs before all other rules):**
+Check `Consecutive reviews` in `PROGRESS.md`. If the value is **≥ 3**: trigger a **mixed session** immediately — skip Steps 1 and 2. A mixed session always runs next when this threshold is hit, regardless of overdue SRS topics. See § Mixed session below.
+
+**Step 1 — SRS priority check (runs only if Step 0 did not trigger):**
+Read the `## Review schedule` table in `PROGRESS.md`. If any topic has `Next review ≤ today`, select **review** mode immediately — regardless of where the rotation currently stands. Do not advance the rotation. State which overdue topic(s) triggered this. If multiple topics are overdue, follow the review session rules (oldest first).
 
 **Step 2 — Standard rotation (only if no SRS review is due):**
 - Always work through the cycle for the current topic before moving to the next.
@@ -72,20 +75,14 @@ Before and during every session, if content from a topic other than the current 
 
 The goal is that the learner is never silently confronted with unfamiliar prerequisite knowledge mid-session, and never picks up a complex topic implicitly without proper grounding.
 
-### Time budget
+### Session depth
 
-Read `Daily time budget` from `CURRICULUM.md` and adapt the session accordingly:
+Do not plan sessions around a fixed time target. The exit condition for a session is that the learner has genuinely understood the core material — they can give their own concrete example, pass the Feynman check, or answer a question correctly with confidence. That is the finish line, not the clock.
 
-| Budget | Concept | Quiz | Kata | Deep-dive |
-|---|---|---|---|---|
-| ≤ 20 min | Core idea only, skip contrast step | 2–3 questions | Not recommended — defer to next session | Not recommended — defer |
-| 30 min | Full concept, all steps | 3–4 questions | Short kata, skip Feynman if time is tight | Not recommended — defer |
-| 45 min | Full concept | 4–5 questions | Full kata + Feynman | Discussion + Feynman, skip transfer task if tight |
-| 60 min+ | Full concept | 5 questions | Full kata + Feynman | Full deep-dive, all steps |
-
-- At the start of each session, tell the learner which steps will be included or skipped given the budget.
-- If no budget is set, default to 45 min.
-- Never silently skip steps — always name what is being cut and why.
+Adapt depth to what the learner shows you, not to a predetermined schedule:
+- If the learner is quick and confident: push harder — add contrast, probe edge cases, raise difficulty.
+- If the learner is struggling: slow down and consolidate — repeat the core idea from a different angle before moving on.
+- If time is genuinely limited: start with the most important step and name what is being deferred. "We'll cover X today and pick up Y next session." Never silently skip the Feynman check or the own-example step — these are how you verify the session actually worked.
 
 ### Concept session
 
@@ -131,9 +128,7 @@ Review sessions are not random — they are targeted. Before starting:
 
 1. **Check the review schedule in `PROGRESS.md`:** prioritize topics where `Next review` ≤ today. Among those, oldest first.
 2. **Check the gap tracker in `PROGRESS.md`:** include any open gap where `Reviews since last seen` >= 2, plus any gap that has never been addressed. These are mandatory regardless of topic priority.
-3. Ask exactly **3 retrieval questions** across these prioritized topics (5 only for Phase Exit Reviews). Do not simply re-ask quiz questions verbatim — rephrase or change the scenario. Tag each question with difficulty: `[easy]`, `[medium]`, or `[hard]`. Apply error analysis on wrong answers, same as in quiz sessions.
-   - **Early exit:** The learner can type `stop`, `fertig`, or `skip review` at any point to end the session immediately. Record the questions answered so far, update SRS/gaps only for those, and exit. State clearly: "Review beendet. [n] von 3 Fragen abgeschlossen — PROGRESS.md aktualisiert."
-   - **Combined answer + confidence:** For each question, ask answer and confidence in a single step: "Antworte und gib direkt danach deine Sicherheit an (knew it / unsure / guessed)." Do not split into two separate turns. Give feedback after receiving both.
+3. Mix 3–5 retrieval questions across these prioritized topics. Do not simply re-ask quiz questions verbatim — rephrase or change the scenario. Tag each question with difficulty: `[easy]`, `[medium]`, or `[hard]`. Apply error analysis on wrong answers, same as in quiz sessions.
 4. After the review, update `PROGRESS.md`:
    - **SRS schedule:** recalculate `Next review` for every topic covered using the rules below
    - **Gap tracker:** increment `Reviews since last seen` by 1 for every open gap **not** addressed; reset to 0 for gaps that were addressed
@@ -150,6 +145,18 @@ Review sessions are not random — they are targeted. Before starting:
 
 On first review of a topic (no prior interval): use 7 days as the starting interval.
 Round to whole days. Write the calculated `Next review` date as YYYY-MM-DD.
+
+### Mixed session
+
+Triggered automatically when `Consecutive reviews ≥ 3` in `PROGRESS.md`. Goal: break the review loop by combining a targeted gap sprint with new content — the learner always leaves with something genuinely new.
+
+Structure (in this order — do not swap):
+
+1. **Gap sprint:** Pick the single most urgent open gap from the gap tracker (`Reviews since last seen` highest, or longest overdue SRS topic). Ask exactly **2 questions** on it. Apply error analysis on wrong answers. Update gap tracker and SRS for those questions only. Do not run more than 2 questions — the point is to stay accountable to open gaps without getting stuck in review again.
+2. **New topic introduction:** Immediately after the gap sprint, move to the next topic in the curriculum. Run a concept session: core idea + the learner's own example. Include the contrast step if a close neighbor exists. Skip the connections step — that can happen in a dedicated follow-up.
+3. **After the mixed session:** Reset `Consecutive reviews` to 0 in `PROGRESS.md`. Log both the gap sprint and the new concept in the session log as a single entry (`Type: mixed`).
+
+The mixed session does not count as a full review for SRS purposes — only the 2 gap sprint questions update SRS. The new concept follows the normal concept session output rules.
 
 ---
 
@@ -171,6 +178,7 @@ Then update `PROGRESS.md`:
 - Add or update entries in the gap tracker (include confidence data from quizzes)
 - Update mastery status for any topic that meets the mastery threshold (see below)
 - Update "Next session" with a concrete recommendation
+- **Update `Consecutive reviews`:** increment by 1 if the session was a review; reset to 0 for any other session type (concept, quiz, kata, deep-dive, mixed)
 
 ---
 
