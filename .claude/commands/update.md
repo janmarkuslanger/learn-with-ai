@@ -8,7 +8,7 @@ Fetch the latest versions of all framework files from the upstream repository
 - `CURRICULUM.md` — learner-specific curriculum
 - `PROGRESS.md` — learner-specific progress tracking
 
-Everything else is a framework file and should be updated.
+Only files explicitly listed in the allowlist below will be updated. All other files in the repository (including learner-generated session outputs in `concepts/`, `quizzes/`, `katas/`, `deep-dives/`, and `review/`) must never be touched automatically — handle any changes to unlisted files manually.
 
 ## Framework files to update
 
