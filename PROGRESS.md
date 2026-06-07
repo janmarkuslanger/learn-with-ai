@@ -5,6 +5,7 @@
 - **Phase:** 1 — _(see CURRICULUM.md)_
 - **Last session:** — none yet —
 - **Next session:** Concept: _(first topic from your CURRICULUM.md)_
+- **Consecutive reviews:** 0
 
 ---
 
