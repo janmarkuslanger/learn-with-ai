@@ -1,7 +1,7 @@
 # learn-with-ai
 
 A personal daily learning system powered by AI agents.
-~45 minutes per session. Structured sessions. Real progress.
+10–60 minutes a day — short days consolidate, long days extend. Real progress either way.
 
 Works for any topic — software architecture, distributed systems, product management, languages, anything.
 
@@ -23,16 +23,23 @@ That's it. The agent reads your curriculum and guides everything from there.
 Type one of these in your agent:
 
 ```
-learn  → auto-select the next session type
-concept         → new concept session  (15–20 min)
-quiz            → quiz on the last concept  (5 questions)
-kata            → focused design or coding task
-deep dive       → trade-off discussion
-review          → spaced repetition over past concepts
+learn        → auto-select the next session — asks how much time you have
+learn 15     → auto-select with a fixed time budget (also: learn s / m / l)
+drill        → ~10 min pure retrieval across due topics (the daily anchor)
+quiz         → quiz on the last concept (earliest the day after)
+concept      → new concept session  (~20–30 min)
+kata         → focused design or coding task  (45+ min, splittable)
+deep dive    → trade-off discussion  (45+ min, splittable)
+review       → spaced repetition over past concepts  (~20–30 min)
 ```
+
+In Claude Code you can also use slash commands: `/learn 15`, `/review` — same behavior, guaranteed trigger.
 
 The agent reads `PROGRESS.md` and `CURRICULUM.md` automatically.
 It knows exactly where you are and what comes next.
+
+**Every session starts with the time question: S (~10 min) / M (~25 min) / L (45+ min).**
+Ten minutes is a real session — a drill or a quiz — not a skipped day.
 
 ---
 
@@ -47,7 +54,7 @@ PROGRESS.md     ← Current status, gaps, session log (agent maintains this)
 /quizzes        ← Quiz results
 /katas          ← Design tasks and solutions
 /deep-dives     ← Trade-off discussion notes
-/review         ← Spaced review logs
+/review         ← Spaced review logs + drills.md (compact drill log)
 /templates      ← Markdown templates for each session type
 ```
 
@@ -57,9 +64,12 @@ PROGRESS.md     ← Current status, gaps, session log (agent maintains this)
 
 ## Tips
 
-- **One session = ~45 minutes.** That's the minimum for every session type to run fully.
+- **Short days consolidate, long days extend.** New material enters on M/L days; S days strengthen what's there. Both count — a daily 10-minute drill beats a weekly 60-minute marathon for retention.
+- **The quiz comes the day after the concept.** That's deliberate: it tests what you kept, not what you just heard.
+- **Big sessions can be split.** If time runs out mid-kata, the agent pauses and resumes next time.
 - **Be honest in quizzes.** The agent tracks your gaps and revisits them.
 - **Use `learn` each time.** The agent picks the right next session automatically.
+- **Topics are right-sized automatically.** Default per topic: concept + quiz + one application session. The agent expands load-bearing topics to the full cycle and trims small ones — it announces each call, and one word from you overrides it.
 - **Reviews happen naturally.** After every 4 completed topics, the agent inserts a review.
 - **Gap weeks are fine.** Come back after a break and the agent picks up exactly where you left off.
 - **Real projects make it stick.** Add your actual projects to `CURRICULUM.md`.

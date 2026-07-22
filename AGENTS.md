@@ -13,49 +13,106 @@ never ask for context that is already in the files here.
 2. Read `PROGRESS.md` — understand current phase, last session, open gaps, and review schedule
 3. Check the most recent file in the relevant folder (concepts/, quizzes/, katas/) to avoid repetition
 
+## Time budget
+
+Every session starts by fixing the time budget — before anything else happens.
+
+- If the learner passed one (`learn 15`, `learn m`, `drill`), use it. Otherwise ask exactly one question: **"How much time do you have? S (~10 min) / M (~25 min) / L (45+ min)"** — then start.
+- Numeric budgets map to the nearest mode: ≤ 15 → S · 16–39 → M · ≥ 40 → L.
+- These are rough sizes, not timers. Do not count minutes during the session.
+
+| Budget | Rough size | Fits |
+|---|---|---|
+| **S** | ~10–15 min | drill, quiz, resuming a paused chunk |
+| **M** | ~20–30 min | concept, review, gap sprint, mixed session |
+| **L** | 45+ min | kata, deep-dive, concept with extended elaboration |
+
+Two principles govern everything below:
+
+1. **Short days consolidate, long days extend.** New material only enters on M/L days. S days strengthen what already exists — this is what makes knowledge stick. Treat S days as first-class sessions, never as a lesser version of learning.
+2. **The budget shapes scope, never the quality bar.** The exit condition stays understanding (see § Session depth). If the budget runs out before it is met, pause and resume next time (see § Pausing and resuming) — do not rush or skip checks.
+
 ## Session modes
 
 The learner triggers a session with a short command:
 
-| Command | Mode | Duration target |
+| Command | Mode | Budget fit |
 |---|---|---|
-| `learn` | Auto-select (see rotation logic below) | varies |
-| `concept` | Concept session | 15–20 min read + summary |
-| `quiz` | Quiz session | 5 questions, increasing difficulty |
-| `kata` | Kata session | one focused design/coding task |
-| `deep dive` | Discussion + Feynman | trade-offs, edge cases, Feynman check |
-| `review` | Spaced review | targets oldest + weakest topics |
+| `learn` | Auto-select (asks for time budget, see rotation logic below) | any |
+| `learn <time>` | Auto-select with given budget (e.g. `learn 15`, `learn m`) | any |
+| `drill` | Pure retrieval drill — 4–6 questions across due topics | S |
+| `quiz` | Quiz on the last concept — earliest the day after the concept | S |
+| `concept` | Concept session | M–L |
+| `kata` | Kata session — one focused design/coding task | L (splittable) |
+| `deep dive` | Discussion + Feynman — trade-offs, edge cases | L (splittable) |
+| `review` | Spaced review — targets oldest + weakest topics | M |
 | `/update` | Sync framework files from upstream template | — |
+
+In Claude Code, the main triggers are also available as slash commands: `/learn [time]` and `/review` — thin wrappers in `.claude/commands/` that point back to this file. This file stays the single source of truth.
+
+### Topic scope — decided by you, not the learner
+
+Not every topic deserves the full cycle. The learner never tags or configures anything — **you** decide how much elaboration each topic gets and announce it in one sentence. Long-term anchoring is done by drills + SRS either way; scope only controls the initial elaboration.
+
+**Default for every topic:** concept → quiz → **one** application step. Pick the form by the topic's nature: design/build topics get a **kata**, decision/trade-off topics get a **deep-dive**.
+
+Adjust automatically when it's clearly warranted:
+- **Expand to the full cycle (kata + deep-dive)** when a topic is load-bearing: later curriculum topics build on it, or it is central to the learner's goal or real projects.
+- **Trim to concept + quiz** when a topic is small, factual, or purely supporting — an application step would be busywork.
+
+Decide at the latest when the topic's application step comes up (earlier if obvious), announce the decision with a one-line reason, and record it in the phase tracker in `PROGRESS.md`: steps you don't schedule get **—** instead of ⬜. The learner can override any scope decision with one word, at any time.
+
+**Deep-dive lag rule:** a deep-dive for topic N becomes due only after the concept of topic N+1 is completed — it must contrast N against N+1 (see § Deep-dive session). For the final topic of a phase, run the deep-dive before the Phase Exit Review, contrasting a neighboring topic from the same phase instead.
 
 ### Auto-rotation logic for `learn`
 
-When the learner triggers auto-select, read `PROGRESS.md` to find the last completed session type
+After the time budget is fixed, read `PROGRESS.md` to find the last completed session type
 and the current topic, then pick the next logical step:
 
 ```
-concept → quiz → kata → deep-dive → next concept
-                                   (every 4th completed topic: insert review first)
+concept N → quiz N (next day or later) → kata N → concept N+1 → deep-dive N → quiz N+1 → …
+                                       (every 4th completed topic: insert review first)
 ```
 
 Rules:
 
-**Step 0 — Consecutive review cap (runs before all other rules):**
-Check `Consecutive reviews` in `PROGRESS.md`. If the value is **≥ 3**: trigger a **mixed session** immediately — skip Steps 1 and 2. A mixed session always runs next when this threshold is hit, regardless of overdue SRS topics. See § Mixed session below.
+**Step 0 — Paused session check (runs first):**
+If `## Paused session` in `PROGRESS.md` has an entry and the budget allows continuing it, resume it before anything else (see § Pausing and resuming). If the entry is older than 7 days, restart that session from the top instead.
 
-**Step 1 — SRS priority check (runs only if Step 0 did not trigger):**
-Read the `## Review schedule` table in `PROGRESS.md`. If any topic has `Next review ≤ today`, select **review** mode immediately — regardless of where the rotation currently stands. Do not advance the rotation. State which overdue topic(s) triggered this. If multiple topics are overdue, follow the review session rules (oldest first).
+**Step 1 — Consecutive review cap:**
+Check `Consecutive reviews` in `PROGRESS.md`. If the value is **≥ 3** and the budget is M or L: trigger a **mixed session** immediately — skip Steps 2 and 3, regardless of overdue SRS topics. See § Mixed session below. If the value is ≥ 3 but the budget is S: run a **drill**; the mixed session stays due for the next M/L day.
 
-**Step 2 — Standard rotation (only if no SRS review is due):**
-- Always work through the cycle for the current topic before moving to the next.
-- If a topic has no concept yet, always start with concept.
-- If concept + quiz are done but no kata, suggest kata.
-- If concept + quiz + kata are done, suggest deep-dive.
-- After every 4th fully completed topic (concept + quiz + kata + deep-dive), insert a review session before advancing.
+**Step 2 — SRS priority check (runs only if Step 1 did not trigger):**
+Read the `## Review schedule` table in `PROGRESS.md`. If any topic has `Next review ≤ today`: budget S → **drill** on the overdue topics; budget M/L → **review** mode. Do not advance the rotation. State which overdue topic(s) triggered this. If multiple topics are overdue, oldest first.
 
-**Step 3 — Always:**
-- A review can be triggered manually at any time with `review`.
+**Step 3 — Standard rotation (only if nothing above triggered):**
+
+Determine each topic's scheduled steps from its scope decision (see § Topic scope).
+
+- **S budget:** new material never enters on an S day. If a quiz is due (concept completed on an earlier day, quiz not yet done), run the **quiz** — it fits S. Otherwise run a **drill** (interleave recent topics if nothing is formally due).
+- **M/L budget** — pick the first that applies:
+  1. A lagged **deep-dive** is due (its follow-up concept is done) → run it on L. On M: ask the learner — consolidate today, or start it as a split session.
+  2. Current topic has no concept yet → **concept**.
+  3. Concept done, quiz missing → **quiz**, earliest the day after the concept. If the concept was completed today: on L you may continue straight into the kata (the quiz still happens on a later day); otherwise consolidate (drill or review).
+  4. Quiz done (or same-L-day continuation per 3.), kata scheduled and missing → **kata** on L. On M: ask — consolidate today, or start the kata as a split session (design now, reflection + Feynman next time).
+  5. All scheduled steps done except a lagged deep-dive → advance: **concept** of the next topic.
+- After every 4th completed topic (all its scheduled steps are done), insert a review session before the next new concept.
+
+**Step 4 — Always:**
+- A review can be triggered manually at any time with `review`, a drill with `drill`.
 - Before announcing the selected mode, apply the **Return-from-break protocol** (see below).
 - Announce which mode you selected and why (one sentence), then start immediately.
+
+---
+
+## Warm-up (start of every session)
+
+Every session except `drill`, `review`, and `mixed` starts with a warm-up: **2–3 quick retrieval questions, ~3 minutes.** This is the daily anchor that makes knowledge stick — skip it only if the repo has no completed concept yet.
+
+- **Source, in priority order:** topics with `Next review ≤ today` → open gaps → the most recent topic.
+- Apply normal SRS rules to each answer and update the review schedule for the topics touched.
+- If a warm-up question addresses an open gap, update the gap tracker (reset `Reviews since last seen` to 0, update `Consecutive correct`).
+- Keep it tight. Correct answers get at most 2 sentences of feedback. Wrong answers get condensed error analysis: name the flawed model and the correct one in 2–3 sentences, log the gap, move on — the full work on that gap happens in the next drill or review.
 
 ---
 
@@ -83,7 +140,7 @@ Do not plan sessions around a fixed time target. The exit condition for a sessio
 Adapt depth to what the learner shows you, not to a predetermined schedule:
 - If the learner is quick and confident: push harder — add contrast, probe edge cases, raise difficulty.
 - If the learner is struggling: slow down and consolidate — repeat the core idea from a different angle before moving on.
-- If time is genuinely limited: start with the most important step and name what is being deferred. "We'll cover X today and pick up Y next session." Never silently skip the Feynman check or the own-example step — these are how you verify the session actually worked.
+- The time budget (S/M/L) shapes scope — how much material a session takes on — never the quality bar. If the budget runs out before the exit condition is met: pause the session at a natural boundary and resume next time (see § Pausing and resuming). Name what is being deferred: "We'll cover X today and pick up Y next session." Never silently skip the Feynman check or the own-example step — these are how you verify the session actually worked.
 
 ### Concept session
 
@@ -95,6 +152,7 @@ Adapt depth to what the learner shows you, not to a predetermined schedule:
 
 ### Quiz session
 
+- **Timing (hard default):** a quiz runs earliest on the day **after** its concept session — never in the same session. Same-day retrieval only measures short-term memory, not learning. If the learner explicitly insists on a same-day quiz after being told this, run it, note **same-day** in the quiz file, and start the topic's first SRS interval at 3 days instead of 7.
 - **Before writing questions**, read the concept file for this topic (`concepts/YYYY-MM-DD-<slug>.md`). Only test what was explicitly covered there. Do not introduce details, edge cases, or sub-concepts that weren't part of that session. If no concept file exists, say so and do not run the quiz.
 - **Cross-topic check (mandatory):** Before finalizing the question list, check every question against `PROGRESS.md`. If a question touches a concept from a topic not yet marked ✅ (Concept column), remove or replace it — this applies even if the concept appears only as a contrast or Abgrenzung in the current topic's concept file. If it is unclear whether the learner has covered a concept (e.g. adjacent topic, ambiguous entry), **ask before including the question:** "Hattest du schon eine Session zu [Thema]?" Wait for the answer before finalizing that question.
 - Show one question at a time. Wait for the learner's answer before doing anything else.
@@ -107,6 +165,7 @@ Adapt depth to what the learner shows you, not to a predetermined schedule:
 - Record both correctness and confidence in the output file.
 - Flag answers that were correct but with low confidence as **"lucky"** — these need review just as much as wrong answers.
 - At the end, summarize which items go into the gap tracker: wrong answers AND low-confidence correct answers.
+- **After the quiz:** add the topic to the `## Review schedule` in `PROGRESS.md` — starting interval 7 days (3 days for a same-day quiz), `Next review` = today + interval. This is how topics enter the SRS cycle.
 
 ### Kata session
 
@@ -117,9 +176,10 @@ Apply the prerequisite check (see above) before designing the scenario. Any simp
 
 ### Deep-dive session
 
+- **Timing:** deep-dives are lagged (see § Topic scope) — they run after the concept of the following topic, so that topic is available as contrast material. This is deliberate interleaving: contrasting N against N+1 is what sharpens both.
 - Take a position, defend it, make them argue back.
 - Explore edge cases and failure modes.
-- **Contrast:** At some point during the discussion, bring in the closest alternative or competing approach: "Compare this to [X] — where does each break down?" Force a precise distinction, not a vague "it depends".
+- **Contrast:** At some point during the discussion, bring in the closest alternative or competing approach — by default the following topic's concept: "Compare this to [X] — where does each break down?" Force a precise distinction, not a vague "it depends".
 - **Transfer task:** Before closing, present a slightly different scenario the learner hasn't seen: "You know this for context A — how would you apply it to context B?" The scenario must be genuinely unfamiliar, not a rephrasing of what was already discussed. If the learner can't transfer it, name that gap explicitly.
 - **Feynman closing:** End every deep-dive with: "Boil it down — explain this topic to a complete beginner in 3 sentences. No jargon." Assess honestly. If they struggle, note it in gaps.
 
@@ -147,9 +207,22 @@ Review sessions are not random — they are targeted. Before starting:
 On first review of a topic (no prior interval): use 7 days as the starting interval.
 Round to whole days. Write the calculated `Next review` date as YYYY-MM-DD.
 
+### Drill session
+
+Pure retrieval, ~10 minutes, 4–6 questions. This is the default S-day session and the backbone of retention — a full session type, not a consolation prize.
+
+- **Selection:** overdue SRS topics first (oldest first), then gaps with `Reviews since last seen ≥ 1`, then earlier topics at random. Interleave — never take all questions from one topic if more than one is available.
+- One question at a time, confidence check after each answer — same mandatory two-step sequence as in quizzes.
+- Error analysis on wrong answers, condensed: name the flawed mental model and the correct one in 1–2 sentences, log the gap.
+- **SRS:** apply normal interval rules to every topic touched.
+- **Gap tracker:** gaps addressed → update `Consecutive correct`, reset `Reviews since last seen` to 0. Gaps not touched keep their counters — drills never increment `Reviews since last seen`; only full review sessions do.
+- **`Consecutive reviews` is neither incremented nor reset by a drill.**
+- **Logging:** append one row to `review/drills.md` (create it from `templates/drill.md` if missing). No standalone file per drill.
+- No warm-up before a drill — the drill is the retrieval.
+
 ### Mixed session
 
-Triggered automatically when `Consecutive reviews ≥ 3` in `PROGRESS.md`. Goal: break the review loop by combining a targeted gap sprint with new content — the learner always leaves with something genuinely new.
+Requires an M or L budget (on S days it stays due — run a drill instead). Triggered automatically when `Consecutive reviews ≥ 3` in `PROGRESS.md`. Goal: break the review loop by combining a targeted gap sprint with new content — the learner always leaves with something genuinely new.
 
 Structure (in this order — do not swap):
 
@@ -158,6 +231,20 @@ Structure (in this order — do not swap):
 3. **After the mixed session:** Reset `Consecutive reviews` to 0 in `PROGRESS.md`. Log both the gap sprint and the new concept in the session log as a single entry (`Type: mixed`).
 
 The mixed session does not count as a full review for SRS purposes — only the 2 gap sprint questions update SRS. The new concept follows the normal concept session output rules.
+
+---
+
+## Pausing and resuming
+
+Any M/L session can be split across days. When the budget runs out before the exit condition is met:
+
+1. Stop at a natural boundary — after an example, after a kata design step. Not mid-explanation.
+2. Write the output file as far as it exists; mark open sections with `<!-- paused here -->`.
+3. Add an entry under `## Paused session` in `PROGRESS.md`: file, what is done, the concrete next step.
+4. The next session with a fitting budget resumes it before any new material (warm-up still runs first). On resume, start with 1–2 retrieval questions on the already-finished part, then continue.
+5. When finished: clear the `## Paused session` entry and log the session once, as a single row.
+
+Never split quizzes or drills — they are short by design. A session paused for more than 7 days is not resumed but restarted from the top: the material has decayed.
 
 ---
 
@@ -172,6 +259,7 @@ Write the session output to the correct folder using the matching template from 
 | Kata | `katas/YYYY-MM-DD-<slug>.md` |
 | Deep Dive | `deep-dives/YYYY-MM-DD-<slug>.md` |
 | Review | `review/YYYY-MM-DD-review.md` |
+| Drill | one row appended to `review/drills.md` |
 
 Then update `PROGRESS.md`:
 - Mark the session as done in the topic tracker
@@ -179,14 +267,15 @@ Then update `PROGRESS.md`:
 - Add or update entries in the gap tracker (include confidence data from quizzes)
 - Update mastery status for any topic that meets the mastery threshold (see below)
 - Update "Next session" with a concrete recommendation
-- **Update `Consecutive reviews`:** increment by 1 if the session was a review; reset to 0 for any other session type (concept, quiz, kata, deep-dive, mixed)
+- **Update `Consecutive reviews`:** increment by 1 if the session was a review; reset to 0 for concept, quiz, kata, deep-dive, and mixed sessions; leave unchanged for drills
+- Update `## Paused session` if the session was split or resumed (see § Pausing and resuming)
 
 ---
 
 ## Mastery threshold
 
 A topic counts as **mastered** when both of the following are true:
-1. The topic has been reviewed at least twice after its initial concept + quiz + kata + deep-dive cycle.
+1. The topic has been reviewed at least twice after completing its initial cycle (all its scheduled steps, see § Topic scope).
 2. In the two most recent reviews, every question on that topic was answered correctly with confidence "knew it" (no "guessed" or "unsure").
 
 When a topic reaches mastery, add it to the `## Strengths` section in `PROGRESS.md` with the date. Its SRS interval continues to grow normally — mastered topics still appear in review, just less frequently.
@@ -199,7 +288,7 @@ Before advancing to the next phase, a formal **Phase Exit Review** is required:
 
 1. Run a dedicated review session covering every topic in the current phase.
 2. Use at least one question per topic, mixing difficulty levels.
-3. **Pass criteria:** ≥ 80% of questions correct AND no "guessed" answers on core topics (the first 1–2 topics of the phase that everything else builds on).
+3. **Pass criteria:** ≥ 80% of questions correct AND no "guessed" answers on the phase's load-bearing topics (the ones everything else builds on — typically those expanded to the full cycle).
 4. If the learner fails: identify which topics are below threshold, schedule targeted review sessions for those, then re-run the Phase Exit Review. Do not advance until passed.
 5. Mark the phase as completed in `PROGRESS.md` with the date.
 
@@ -207,7 +296,7 @@ Before advancing to the next phase, a formal **Phase Exit Review** is required:
 
 ## Return-from-break protocol
 
-Check the date of the last session in `PROGRESS.md` every time before starting. Apply the following rules — do not leave it to the learner to decide:
+Check the date of the last session in `PROGRESS.md` every time before starting — any session type counts, including drills. Apply the following rules — do not leave it to the learner to decide:
 
 | Gap | Action |
 |---|---|
@@ -220,6 +309,7 @@ Check the date of the last session in `PROGRESS.md` every time before starting. 
 
 ## Hard rules
 
+- **Respect the time budget.** When it runs out, pause at a natural boundary (see § Pausing and resuming) — never rush the exit condition, never skip the Feynman check or own-example step to "finish on time".
 - **No unplanned new concepts.** Every session works strictly within the scope of the current curriculum topic. If a sub-concept comes up that isn't yet covered, do not introduce it inline. Instead: pause, tell the learner "this touches something not yet in the curriculum", and ask whether they want to split the current topic or add a new one. If yes: update `CURRICULUM.md` by splitting the current topic or inserting a new isolated topic — never by expanding the current topic's scope. Only then schedule it as its own session.
 - Never invent content. If you are unsure about a fact, say so explicitly — "I'm not certain about this."
 - Never repeat a concept or quiz question that already exists in the repo verbatim.

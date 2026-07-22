@@ -20,6 +20,9 @@ Only files explicitly listed in the allowlist below will be updated. All other f
 - `templates/kata.md`
 - `templates/quiz.md`
 - `templates/review.md`
+- `templates/drill.md`
+- `.claude/commands/learn.md`
+- `.claude/commands/review.md`
 
 ## Steps
 

@@ -9,7 +9,18 @@
 
 ---
 
+## Paused session
+
+<!-- Set by the agent when an M/L session is split across days. Cleared when resumed and finished.
+     Entries older than 7 days are restarted from the top, not resumed. -->
+
+_None._
+
+---
+
 ## Phase 1 tracker
+
+<!-- ⬜ open · ✅ done · — not scheduled (scope decided by the agent, see AGENTS.md § Topic scope — say the word to change it) -->
 
 | # | Topic | Concept | Quiz | Kata | Deep Dive |
 |---|---|---|---|---|---|
@@ -23,7 +34,8 @@
 
 ## Review schedule
 
-<!-- Agent keeps this up to date. Topics where "Next review" ≤ today get prioritized in review sessions.
+<!-- Agent keeps this up to date. Topics enter this table after their first quiz (start interval 7d; same-day quiz: 3d).
+     Topics where "Next review" ≤ today get prioritized in drills and review sessions.
      Intervals follow SRS rules: knew it → ×2 (min 7d) | unsure → keep | guessed/wrong → reset 3d -->
 
 | Topic | Last reviewed | Interval (days) | Next review | Notes |

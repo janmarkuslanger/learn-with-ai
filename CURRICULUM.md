@@ -24,12 +24,6 @@
 
 ---
 
-## Session settings
-
-- **Daily time budget:** <!-- e.g. 30 min, 45 min, 60 min — the agent will fit each session into this window -->
-
----
-
 ## Communication
 
 - **Session language:** <!-- Language the agent uses when talking to you during sessions (e.g. German, English) -->
@@ -42,7 +36,9 @@
 
 <!-- Define your personal learning roadmap here.
      Recommended structure: 3–6 phases with 3–6 topics each.
-     The agent works through topics sequentially, one session at a time — no week schedule needed. -->
+     The agent works through topics sequentially, one session at a time — no week schedule needed.
+     Just list the topics. The agent decides how deep each one goes (see AGENTS.md § Topic scope)
+     and you can override any of its calls with one word. -->
 
 ### Phase 1 — <Name>
 
