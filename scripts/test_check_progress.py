@@ -107,6 +107,10 @@ class CheckProgressTest(unittest.TestCase):
         errors = check(FILLED.replace("| 2026-10-20 | drill |", "| 20.10.2026 | drill |"))
         self.assertEqual(errors, ["Session log: invalid date '20.10.2026' (want YYYY-MM-DD)"])
 
+    def test_row_with_wrong_column_count_is_reported(self):
+        errors = check(FILLED.replace("| 2026-10-20 | drill | CQRS | |", "| 2026-10-20 | drill |"))
+        self.assertEqual(errors, ["Session log: row ['2026-10-20', 'drill'] must have 4 columns"])
+
     def test_tables_inside_comments_are_ignored(self):
         commented = FILLED.replace("## Strengths\n", "## Strengths\n<!-- | a | b |\n|---|---|\n| x | y | -->\n")
         self.assertEqual(check(commented), [])
