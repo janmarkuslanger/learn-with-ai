@@ -33,7 +33,7 @@ deep dive    → trade-off discussion  (45+ min, splittable)
 review       → spaced repetition over past concepts  (~20–30 min)
 ```
 
-In Claude Code you can also use slash commands: `/learn 15`, `/review` — same behavior, guaranteed trigger.
+In Claude Code you can also use slash commands: `/learn 15`, `/drill`, `/review` — same behavior, guaranteed trigger.
 
 The agent reads `PROGRESS.md` and `CURRICULUM.md` automatically.
 It knows exactly where you are and what comes next.
@@ -47,7 +47,7 @@ Ten minutes is a real session — a drill or a quiz — not a skipped day.
 
 ```
 CURRICULUM.md   ← Your personal file: background, projects, curriculum  ← EDIT THIS
-AGENTS.md       ← Instructions for the AI agent (generic, no changes needed)
+AGENTS.md       ← Instructions for the AI agent: rotation, SRS, tracking (generic, no changes needed)
 PROGRESS.md     ← Current status, gaps, session log (agent maintains this)
 
 /concepts       ← Concept session notes
@@ -56,7 +56,13 @@ PROGRESS.md     ← Current status, gaps, session log (agent maintains this)
 /deep-dives     ← Trade-off discussion notes
 /review         ← Spaced review logs + drills.md (compact drill log)
 /templates      ← Markdown templates for each session type
+/protocol       ← Step-by-step spec per session type (read by the agent)
+/scripts        ← check_progress.py — validates PROGRESS.md after every session
 ```
+
+The agent runs `python3 scripts/check_progress.py` after each session to catch broken tables or
+miscalculated review dates. It needs only Python 3, no packages. Run its tests with
+`python3 -m unittest discover -s scripts`.
 
 
 
@@ -81,4 +87,5 @@ PROGRESS.md     ← Current status, gaps, session log (agent maintains this)
 Everything is driven by `CURRICULUM.md`. To change your learning path:
 - Edit the phases and topics in `CURRICULUM.md`
 
-No need to touch `AGENTS.md` or templates unless you want to change how sessions work.
+No need to touch `AGENTS.md`, `protocol/` or templates unless you want to change how sessions work.
+Run `/update` in Claude Code to pull framework improvements — `CURRICULUM.md` and `PROGRESS.md` are never touched.
