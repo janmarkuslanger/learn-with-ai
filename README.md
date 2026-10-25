@@ -14,16 +14,14 @@ Works for any topic — software architecture, distributed systems, product mana
 3. **Open this repo in your AI agent** (e.g. Claude Code, Cursor, or any agent that reads `AGENTS.md`)
 4. **Start your first session** by typing `learn`
 
-That's it. The agent reads your curriculum and guides everything from there.
+The agent reads your curriculum and progress and guides everything from there.
 
 ---
 
 ## How to use
 
-Type one of these in your agent:
-
 ```
-learn        → auto-select the next session — asks how much time you have
+learn        → auto-select the next session — asks how much time you have: S (~10) / M (~25) / L (45+ min)
 learn 15     → auto-select with a fixed time budget (also: learn s / m / l)
 drill        → ~10 min pure retrieval across due topics (the daily anchor)
 quiz         → quiz on the last concept (earliest the day after)
@@ -33,13 +31,8 @@ deep dive    → trade-off discussion  (45+ min, splittable)
 review       → spaced repetition over past concepts  (~20–30 min)
 ```
 
-In Claude Code you can also use slash commands: `/learn 15`, `/drill`, `/review` — same behavior, guaranteed trigger.
-
-The agent reads `PROGRESS.md` and `CURRICULUM.md` automatically.
-It knows exactly where you are and what comes next.
-
-**Every session starts with the time question: S (~10 min) / M (~25 min) / L (45+ min).**
-Ten minutes is a real session — a drill or a quiz — not a skipped day.
+In Claude Code, `/learn 15`, `/drill` and `/review` work as slash commands — same behavior, guaranteed trigger.
+`/update` pulls framework improvements; `CURRICULUM.md` and `PROGRESS.md` are never touched.
 
 ---
 
@@ -47,45 +40,27 @@ Ten minutes is a real session — a drill or a quiz — not a skipped day.
 
 ```
 CURRICULUM.md   ← Your personal file: background, projects, curriculum  ← EDIT THIS
-AGENTS.md       ← Instructions for the AI agent: rotation, SRS, tracking (generic, no changes needed)
 PROGRESS.md     ← Current status, gaps, session log (agent maintains this)
-
-/concepts       ← Concept session notes
-/quizzes        ← Quiz results
-/katas          ← Design tasks and solutions
-/deep-dives     ← Trade-off discussion notes
-/review         ← Spaced review logs + drills.md (compact drill log)
-/templates      ← Markdown templates for each session type
-/protocol       ← Step-by-step spec per session type (read by the agent)
+AGENTS.md       ← Agent instructions: rotation, SRS, tracking
+/protocol       ← Step-by-step spec per session type
+/templates      ← Markdown templates for each session output
 /scripts        ← check_progress.py — validates PROGRESS.md after every session
+
+/concepts  /quizzes  /katas  /deep-dives  /review   ← your session notes
 ```
 
-The agent runs `python3 scripts/check_progress.py` after each session to catch broken tables or
-miscalculated review dates. It needs only Python 3, no packages. Run its tests with
-`python3 -m unittest discover -s scripts`.
-
-
+`scripts/check_progress.py` catches broken tables and miscalculated review dates. It needs only
+Python 3; run its tests with `python3 -m unittest discover -s scripts`.
 
 ---
 
 ## Tips
 
-- **Short days consolidate, long days extend.** New material enters on M/L days; S days strengthen what's there. Both count — a daily 10-minute drill beats a weekly 60-minute marathon for retention.
-- **The quiz comes the day after the concept.** That's deliberate: it tests what you kept, not what you just heard.
-- **Big sessions can be split.** If time runs out mid-kata, the agent pauses and resumes next time.
-- **Be honest in quizzes.** The agent tracks your gaps and revisits them.
-- **Use `learn` each time.** The agent picks the right next session automatically.
-- **Topics are right-sized automatically.** Default per topic: concept + quiz + one application session. The agent expands load-bearing topics to the full cycle and trims small ones — it announces each call, and one word from you overrides it.
-- **Reviews happen naturally.** After every 4 completed topics, the agent inserts a review.
-- **Gap weeks are fine.** Come back after a break and the agent picks up exactly where you left off.
+- **Short days count.** New material enters on M/L days; S days strengthen what's there. A daily 10-minute drill beats a weekly 60-minute marathon for retention.
+- **The quiz comes the day after the concept.** It tests what you kept, not what you just heard.
+- **Be honest about confidence.** A confident wrong answer is the most valuable thing the agent can find.
+- **Topics are right-sized automatically.** Default: concept + quiz + one application session. The agent expands load-bearing topics and trims small ones — one word from you overrides it.
+- **Breaks are handled.** After 2+ weeks away, the agent checks what stuck before moving on.
 - **Real projects make it stick.** Add your actual projects to `CURRICULUM.md`.
 
----
-
-## Customizing
-
-Everything is driven by `CURRICULUM.md`. To change your learning path:
-- Edit the phases and topics in `CURRICULUM.md`
-
-No need to touch `AGENTS.md`, `protocol/` or templates unless you want to change how sessions work.
-Run `/update` in Claude Code to pull framework improvements — `CURRICULUM.md` and `PROGRESS.md` are never touched.
+To change your learning path, edit `CURRICULUM.md`. `AGENTS.md`, `protocol/` and the templates only need changes if you want sessions to work differently.

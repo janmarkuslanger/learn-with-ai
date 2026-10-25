@@ -1,8 +1,5 @@
 # Concept session
 
-Part of the coaching protocol — `AGENTS.md` is the entry point and its general rules
-(warm-up, prerequisite check, session depth, tracking) apply on top of this file.
-
 **Output:** `concepts/YYYY-MM-DD-<slug>.md` from `templates/concept.md`.
 
 1. **Prior knowledge — before presenting anything:** ask "Where have you come across this before — even if you didn't know the name for it?" Give the learner 1–2 minutes to surface existing knowledge. Use their answer to calibrate what to skip and what to emphasize.

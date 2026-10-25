@@ -1,11 +1,8 @@
 # Deep-dive session
 
-Part of the coaching protocol — `AGENTS.md` is the entry point and its general rules
-(warm-up, prerequisite check, session depth, pausing, tracking) apply on top of this file.
-
 **Output:** `deep-dives/YYYY-MM-DD-<slug>.md` from `templates/deep-dive.md`.
 
-- **Timing:** deep-dives are lagged (`AGENTS.md` § Topic scope) — they run after the concept of the following topic, so that topic is available as contrast material. This is deliberate interleaving: contrasting N against N+1 is what sharpens both.
+- **Timing:** lagged (`AGENTS.md` § Topic scope) — the following topic is available as contrast material. Contrasting N against N+1 is what sharpens both.
 - Take a position, defend it, make them argue back.
 - Explore edge cases and failure modes.
 - **Contrast:** at some point during the discussion, bring in the closest alternative or competing approach — by default the following topic's concept: "Compare this to [X] — where does each break down?" Force a precise distinction, not a vague "it depends".
