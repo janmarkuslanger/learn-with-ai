@@ -8,49 +8,17 @@
 
 ## Questions
 
+<!-- One block per question (3–5). -->
+
 ### Q1 — <Topic> [easy / medium / hard]
 
 **Question:** ...
 
 **My answer:** ...
 
-**Correct:** yes / no / partial
+**Correct:** yes / no / partial · **Confidence:** knew it / unsure / guessed
 
-**Confidence:** knew it / unsure / guessed
-
-**SRS update:** interval × 2 → next review YYYY-MM-DD / keep interval / reset to 3 days → next review YYYY-MM-DD
-
----
-
-### Q2 — <Topic> [easy / medium / hard]
-
-**Question:** ...
-
-**My answer:** ...
-
-**Correct:** yes / no / partial
-
-**Confidence:** knew it / unsure / guessed
-
-**SRS update:** interval × 2 → next review YYYY-MM-DD / keep interval / reset to 3 days → next review YYYY-MM-DD
-
----
-
-### Q3 — <Topic> [easy / medium / hard]
-
-**Question:** ...
-
-**My answer:** ...
-
-**Correct:** yes / no / partial
-
-**Confidence:** knew it / unsure / guessed
-
-**SRS update:** interval × 2 → next review YYYY-MM-DD / keep interval / reset to 3 days → next review YYYY-MM-DD
-
----
-
-<!-- Add Q4, Q5 as needed -->
+**SRS update:** new interval ?d → next review YYYY-MM-DD
 
 ---
 
@@ -64,7 +32,7 @@
 
 ## Gaps identified
 
-<!-- Wrong or guessed answers that go into the gap tracker -->
+<!-- Wrong, guessed, or confidently wrong answers that go into the gap tracker -->
 
 - ...
 
@@ -72,7 +40,7 @@
 
 ## Mastery updates
 
-<!-- Topics that reached mastery threshold in this session (2× review, 100% knew it) -->
+<!-- Topics that reached the mastery threshold in this session (AGENTS.md § Mastery threshold) -->
 
 - ...
 

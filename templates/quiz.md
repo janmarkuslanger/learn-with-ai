@@ -2,11 +2,13 @@
 
 **Date:** YYYY-MM-DD
 **Phase:** 1
-**Score:** ?/5 correct | ?/5 confident
+**Score:** ?/? correct | ?/? confident
 
 ---
 
 ## Questions & Answers
+
+<!-- One block per question. Difficulty: [easy] / [medium] / [hard]. Error cause required for wrong answers. -->
 
 ### Q1 [easy]
 
@@ -14,65 +16,7 @@
 
 **My answer:** ...
 
-**Correct:** yes / no / partial
-
-**Confidence:** knew it / unsure / guessed
-
-**Notes:** ...
-
----
-
-### Q2 [easy]
-
-**Question:** ...
-
-**My answer:** ...
-
-**Correct:** yes / no / partial
-
-**Confidence:** knew it / unsure / guessed
-
-**Notes:** ...
-
----
-
-### Q3 [medium]
-
-**Question:** ...
-
-**My answer:** ...
-
-**Correct:** yes / no / partial
-
-**Confidence:** knew it / unsure / guessed
-
-**Notes:** ...
-
----
-
-### Q4 [medium]
-
-**Question:** ...
-
-**My answer:** ...
-
-**Correct:** yes / no / partial
-
-**Confidence:** knew it / unsure / guessed
-
-**Notes:** ...
-
----
-
-### Q5 [hard]
-
-**Question:** ...
-
-**My answer:** ...
-
-**Correct:** yes / no / partial
-
-**Confidence:** knew it / unsure / guessed
+**Correct:** yes / no / partial · **Confidence:** knew it / unsure / guessed
 
 **Notes:** ...
 
@@ -80,7 +24,7 @@
 
 ## Gap summary
 
-<!-- Items that go into PROGRESS.md gap tracker: wrong answers + correct-but-guessed answers -->
+<!-- Items for the PROGRESS.md gap tracker: wrong answers, correct-but-guessed ("lucky"), confident errors -->
 
 - ...
 
